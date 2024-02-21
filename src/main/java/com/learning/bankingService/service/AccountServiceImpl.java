@@ -22,16 +22,13 @@ public class AccountServiceImpl implements AccountService {
     private CustomerRepository customerRepository;
 
     @Override
-    public Account createAccount(Long customerId, AccountRequest accountRequest) throws CustomerNotFoundException {
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id: " + customerId));
+    public Account createAccount(Long customerID, AccountRequest accountRequest) throws CustomerNotFoundException {
+        Customer customer = customerRepository.findById(customerID)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id: " + customerID));
 
-        Account account = new Account();
-        account.setAccountType(accountRequest.getAccountType());
-        account.setAccountBalance(accountRequest.getAccountBalance());
-        account.setApproved(accountRequest.getApproved());
-        account.setDateOfCreation(new Date());
-        account.setCustomerId(customer);
+        Account account = Account.build(0L,accountRequest.getAccountType(),accountRequest.getAccountBalance()
+                ,accountRequest.getApproved(),new Date(),customerID);
+
 
         return accountRepository.save(account);
     }

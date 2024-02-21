@@ -20,7 +20,8 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Customer saveCustomer(CustomerRequest customerRequest) {
 
-        Customer customer = Customer.build(0L, customerRequest.getUserName(),customerRequest.getFullName(),customerRequest.getPassword(), customerRequest.getRoles());
+        Customer customer = Customer.build(0L, customerRequest.getUserName(),
+                customerRequest.getFullName(),customerRequest.getPassword(), customerRequest.getRoles());
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         return customerRepository.save(customer);
     }

@@ -47,6 +47,7 @@ public class SecurityConfig {
                         requestMatchers ->
                                 requestMatchers.requestMatchers("/api/customer/register").permitAll()
                                         .requestMatchers("/api/customer/authenticate").permitAll()
+                                        .requestMatchers("/api/customer/{customerID}/account").permitAll()
                                         .requestMatchers("/api/customer/**").permitAll()
                                         .anyRequest().authenticated());
                 httpSecurity.sessionManagement(

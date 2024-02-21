@@ -1,4 +1,6 @@
 package com.learning.bankingService.entity;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import java.util.Date;
 import jakarta.persistence.*;
@@ -7,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor(staticName = "build")
 @Document(value = "account")
 public class Account {
     @Id
@@ -16,6 +20,6 @@ public class Account {
     private Double accountBalance;
     private String approved;
     private Date dateOfCreation;
-    private Customer customerId;
+    private Long customerId;
 }
 

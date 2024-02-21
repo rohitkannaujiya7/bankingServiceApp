@@ -19,12 +19,12 @@ public class AccountController {
 
 
     @PostMapping
-    public ResponseEntity<?> createAccount(@PathVariable Long customerId, @RequestBody AccountRequest accountRequest) throws CustomerNotFoundException {
+    public ResponseEntity<?> createAccount(@PathVariable Long customerID, @RequestBody @Valid AccountRequest accountRequest) throws CustomerNotFoundException {
         System.out.println("Received Account Request Details:");
         System.out.println( accountRequest.getAccountType());
         System.out.println(accountRequest.getAccountBalance());
         System.out.println(accountRequest.getApproved());
-        Account account = accountService.createAccount(customerId, accountRequest);
+        Account account = accountService.createAccount(customerID, accountRequest);
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 }
