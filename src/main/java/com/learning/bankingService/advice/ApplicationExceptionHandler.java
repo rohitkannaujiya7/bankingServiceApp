@@ -20,7 +20,6 @@ public class ApplicationExceptionHandler {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
         errorMap.put("errorMessage", ex.getMessage());
-
         return errorMap;
     }
 
@@ -29,8 +28,6 @@ public class ApplicationExceptionHandler {
     public Map<String, String> handleBusinessException(CustomerNotFoundException ex){
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("errorMessage", ex.getMessage());
-
         return errorMap;
     }
-
 }

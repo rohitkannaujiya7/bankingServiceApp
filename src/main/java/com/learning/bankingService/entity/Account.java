@@ -7,19 +7,17 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-@Data
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "build")
-@Document(value = "account")
+@Document(collection = "account")
+@Data
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long accountNumber;
+    private String accountNumber;
     private String accountType;
     private Double accountBalance;
     private String approved;
     private Date dateOfCreation;
-    private Long customerId;
+    private Long customerID;
 }
 
