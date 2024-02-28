@@ -48,8 +48,8 @@ public class SecurityConfig {
                                 requestMatchers.requestMatchers("/api/customer/register").permitAll()
                                         .requestMatchers("/api/customer/authenticate").permitAll()
                                         .requestMatchers("/api/customer/152/account/accountNo").permitAll()
-                                        .requestMatchers("/api/customer/**")
-                                        .authenticated());
+                                        .requestMatchers("/api/customer/**").permitAll()
+                                        .anyRequest().authenticated());
                 httpSecurity.sessionManagement(
                 sessionConfig->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );

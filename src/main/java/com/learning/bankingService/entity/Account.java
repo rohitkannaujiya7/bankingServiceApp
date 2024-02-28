@@ -1,4 +1,5 @@
 package com.learning.bankingService.entity;
+import com.learning.bankingService.dto.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -14,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Account {
     @Id
     private String accountNumber;
-    private String accountType;
+    private AccountType accountType;
     private Double accountBalance;
     private String approved;
     private Date dateOfCreation;

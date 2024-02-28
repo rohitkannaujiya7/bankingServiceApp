@@ -46,20 +46,16 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account approveAccount(String accountNumber, String approved) throws AccountNotFoundException {
-        // Retrieve the account by customer ID and account number
         Account account = accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new AccountNotFoundException("Account not found for customer"));
 
-        // Update the approval status
         account.setApproved(approved);
 
-        // Save the updated account
         return accountRepository.save(account);
     }
 
-
     @Override
-    public List<Account> getAllAccounts(Long customerId) {
-        return null;
+    public List<Account> getAllAccounts(Long customerID) {
+        return accountRepository.findByCustomerID(customerID);
     }
 }

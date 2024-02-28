@@ -1,5 +1,6 @@
 package com.learning.bankingService.service;
 
+import com.learning.bankingService.ExceptionHandler.CustomerNotFoundException;
 import com.learning.bankingService.dto.CustomerRequest;
 import com.learning.bankingService.entity.Customer;
 import com.learning.bankingService.repo.CustomerRepository;
@@ -24,5 +25,11 @@ public class CustomerServiceImpl implements CustomerService{
                 customerRequest.getFullName(),customerRequest.getPassword(), customerRequest.getRoles());
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         return customerRepository.save(customer);
+    }
+
+    @Override
+    public Customer getCustomerById(Long customerId) throws CustomerNotFoundException {
+        return customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer with ID " + customerId + " not found"));
     }
 }

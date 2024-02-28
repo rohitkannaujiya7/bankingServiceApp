@@ -14,4 +14,5 @@ public interface AccountService {
     Account approveAccount(String accountNumber, String approved) throws AccountNotFoundException;
 
     List<Account> getAllAccounts(Long customerID);
+
 }

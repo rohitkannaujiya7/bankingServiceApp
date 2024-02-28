@@ -1,5 +1,6 @@
 package com.learning.bankingService.controller;
 
+import com.learning.bankingService.ExceptionHandler.CustomerNotFoundException;
 import com.learning.bankingService.dto.AuthRequest;
 import com.learning.bankingService.dto.CustomerRequest;
 import com.learning.bankingService.entity.Customer;
@@ -7,14 +8,13 @@ import com.learning.bankingService.service.CustomerService;
 import com.learning.bankingService.service.JwtService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -44,6 +44,15 @@ public class CustomerRegistrationController {
         } else {
             throw new UsernameNotFoundException("invalid user request !");
         }
+    }
 
+    @GetMapping("/{customerId}")
+    public ResponseEntity<?> getCustomerById(@PathVariable Long customerId) {
+        try {
+            Customer customer = customerService.getCustomerById(customerId);
+            return ResponseEntity.ok(customer);
+        } catch (CustomerNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sorry Customer With " + customerId + " not found");
+        }
     }
 }

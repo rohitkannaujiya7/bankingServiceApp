@@ -9,8 +9,7 @@ import jakarta.validation.constraints.*;
 @NoArgsConstructor
 public class AccountRequest {
     @NotNull(message = "Account type cannot be null")
-    @NotBlank(message = "Account type cannot be blank")
-    private String accountType;
+    private AccountType accountType;
 
     @NotNull(message = "Account balance cannot be null")
     private Double accountBalance;
